@@ -1,0 +1,52 @@
+{% extends "Base.html" %}
+{% block morescript %}
+<link href="css/projectlist.css" type="text/css" rel="stylesheet" id="main-style">
+{% endblock %}
+{% block title %}视频公园{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>视频公园</h1>
+        </div>
+</section>
+
+<section id="content" class="container clearfix">
+    {%for one in videos%}
+    <article class="entry clearfix">
+        <div class="entry-video">
+            <div class="fluid-width-video-wrapper" style="padding-top: 56.2857%;"><iframe height=498 width=510 src="{{one.url}}" frameborder=0 allowfullscreen></iframe></div>
+        </div>
+        <div class="entry-date" time="{{one.time}}">
+            <div class="entry-day"></div>
+            <div class="entry-month"></div>
+        </div>
+        <div class="entry-body">
+            <!--h2 class="entry-title"><a href="/VideoDetail">Useful Talks and Videos from Web Design Conferences</a></h2>
+            <div class="entry-meta">
+                <span class="author"><a href="#">admin</a></span>
+                <span class="category"><a href="#">Animation</a></span>
+                <span class="comments"><a href="#">4 Comments</a></span>
+            </div-->
+            <div class="entry-content">
+                <p>{{one.content}}</p>
+            </div>
+        </div>
+    </article>
+    <hr>
+    {%endfor%}
+    <!--nav class="page-nav">
+        <span>Page 7 of 15</span>
+        <ul>
+            <li><a href="#">« First</a></li>
+            <li><a href="#">‹ Previous</a></li>
+            <li><a href="#">6</a></li>
+            <li class="current">7</li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">Next ›</a></li>
+            <li><a href="#">Last »</a></li>
+        </ul>
+    </nav-->
+</section>
+{% endblock %}

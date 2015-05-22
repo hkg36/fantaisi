@@ -1,0 +1,45 @@
+{% extends "Base.html" %}
+{% block title %}{{news.title}}{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>新闻</h1>
+        </div>
+</section>
+<section class="container clearfix" id="content" style="">
+    <!-- begin main content -->
+    <section class="blog-entry-list" id="main">
+
+        <article class="entry clearfix">
+            <a title="Image Title" href="{{news.image}}" class="entry-image lightbox">
+                <span class="overlay zoom"></span>
+                <img alt="" src="{{news.image ~ "?imageView/1/w/940/h/400"}}">
+            </a>
+            <div class="entry-date" time="{{news.time}}">
+                <div class="entry-day"></div>
+                <div class="entry-month"></div>
+            </div>
+            <div class="entry-body">
+                <h2 class="entry-title">{{news.title}}</h2>
+                <div class="entry-meta">
+                    <span class="author"><a href="#">{{news.author}}</a></span>
+                    <!--span class="category"><a href="#">Photography</a>, <a href="#">Web Design</a></span>
+                    <span class="comments"><a href="#">4 Comments</a></span-->
+                </div>
+                <div class="entry-content">
+                   {{content}}
+                </div>
+            </div>
+        </article>
+        <hr>
+        <section>
+            <h3>相关新闻</h3>
+            <ul class="square indent">
+                {%for one in relate%}
+                <li><a href="/NewsContent?id={{one[0]}}">{{one[1]}}</a></li>
+                {%endfor%}
+            </ul>
+        </section>
+    </section>
+</section>
+{% endblock %}

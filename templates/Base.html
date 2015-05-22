@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<!--[if IE 8]> <html class="ie8 no-js" xmlns:wb="http://open.weibo.com/wb"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" xmlns:wb="http://open.weibo.com/wb"> <!--<![endif]-->
+<head>
+	<!-- begin meta -->
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="wb:webmaster" content="7da8d9aa91949a2d" />
+	<!-- end meta -->
+	<link href="http://cdn.bootcss.com/normalize/3.0.3/normalize.min.css" type="text/css">
+	<!-- begin CSS -->
+	<link href="/css/style.css" type="text/css" rel="stylesheet" id="main-style">
+	<link href="/css/responsive.css" type="text/css" rel="stylesheet">
+	<link href="/css/colors/blue2.css" type="text/css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/sweetalert/0.5.0/sweet-alert.css" rel="stylesheet">
+	<!-- end CSS -->
+	
+    <link href="/images/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/js/photoswipe/photoswipe.css">
+    <link rel="stylesheet" href="/js/photoswipe/default-skin/default-skin.css">
+    <script src="/js/photoswipe/photoswipe.min.js"></script>
+    <script src="/js/photoswipe/photoswipe-ui-default.js"></script>
+	<!-- begin JS -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js" ></script> <!-- jQuery -->
+    <script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js" ></script>
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js" ></script> <!-- jQuery easing -->
+	<script src="http://cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js" ></script> <!-- Modernizr -->
+
+    <script src="/js/ddlevelsmenu.js" ></script> <!-- drop-down menu -->
+    <script > <!-- drop-down menu -->
+        ddlevelsmenu.setup("nav", "topbar");
+    </script>
+    <script src="http://cdn.bootcss.com/TinyNav.js/1.2.0/tinynav.min.js" ></script> <!-- tiny nav -->
+    <script src="http://cdn.bootcss.com/jquery-validate/1.13.1/jquery.validate.min.js" ></script> <!-- form validation -->
+    <script src="/js/jquery.validate.local_zh.js"></script>
+    <script src="http://cdn.bootcss.com/flexslider/2.3.0/jquery.flexslider-min.js" ></script> <!-- slider -->
+    <script src="/js/jquery.jcarousel.min.js" ></script> <!-- carousel -->
+    <script src="/js/jquery.ui.totop.min.js" ></script> <!-- scroll to top -->
+    <script src="http://cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js" ></script> <!-- responsive video embeds -->
+    <script  src="/js/revslider.jquery.themepunch.plugins.min.js"></script> <!-- swipe gestures -->
+    <script src="http://cdn.bootcss.com/jquery.tipsy/1.0.2/jquery.tipsy.min.js" ></script> <!-- tooltips -->
+    <script src="http://cdn.bootcss.com/moment.js/2.10.2/moment-with-locales.min.js"></script>
+    <script src="/js/froogaloop.min.js" ></script> <!-- video manipulation -->
+    <script src="http://cdn.bootcss.com/sweetalert/0.5.0/sweet-alert.min.js"></script>
+    <script  src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+            data-appid="101218076" data-redirecturi="http://test.wowfantasy.cn/login/QQLogin" charset="utf-8"></script>
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=192249516" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/custom.js" ></script> <!-- jQuery initialization -->
+    {% block morescript %}
+    {% endblock %}
+    <!-- end JS -->
+    {% block head %}
+   <title>{% block title %}Exquiso - Responsive Multi-Purpose Theme{% endblock %}</title>
+   {% endblock %}
+</head>
+
+<body class="boxed">
+<!-- begin container -->
+<div id="wrap">
+	<!-- begin header -->
+    <header id="header" class="container clearfix">
+    	<!-- begin logo -->
+        <h1 id="logo"><a href="/"><img src="/images/logo.png" alt="Fantasy"></a></h1>
+        <!-- end logo -->
+        
+        <!-- begin navigation wrapper -->
+        <div class="nav-wrap clearfix">
+
+        <div class="loginPlane">
+            <div id="loginbn_plane">
+                <a href="#" id="qqlogin_bn"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/bt_white_24X24.png"></a>
+                <a href="#" id="wblogin_bn"><img src="http://www.sinaimg.cn/blog/developer/wiki/24x24.png"></a>
+            </div>
+            <div id="logininfo_plane" style="display: none"></div>
+        </div>
+
+        <!-- begin navigation -->
+        <nav id="nav">
+            <ul id="navlist" class="clearfix">
+                <li class="current"><a href="/">首页</a>
+                <li><a href="/ProjectList">项目展示</a>
+                </li>
+                <li><a href="/NewsList">硬件有料</a>
+                    <!--a rel="submenu2" href="/NewsList">硬件有料</a>
+                    <ul id="submenu2" class="ddsubmenustyle">
+                        <li><a href="/NewsList">创新前沿</a></li>
+                        <li><a href="#">热门资讯</a></li>
+                    </ul-->
+                </li>
+                <li><a href="OfflineActionList">线下活动</a>
+                </li>
+                <li><a href="VideoList" >视频公园</a>
+                </li>
+                <li><a href="/FreeTry">免费尝鲜</a></li>
+            </ul>
+        </nav>
+        <!-- end navigation -->
+        
+        </div>
+        <!-- end navigation wrapper -->
+    </header>
+    <!-- end header -->
+
+    {% block content %}EMPTY{% endblock %}
+    
+    <!-- begin footer -->
+	<footer id="footer">
+        <script src="/js/jquery.qrcode.min.js"></script>
+        <!-- begin footer top -->
+        <div id="footer-top">
+        	<div class="container clearfix">
+                <div class="one-half">
+                    <div class="widget">
+                        <h3>关注微信</h3>
+                        <div id="weixin_qrcode" style="padding: 10px;width: 120px;height: 120px;background-color: #ffffff;"></div>
+                       <script type="application/javascript">
+                           function toUtf8(str) {
+                              var out, i, len, c;
+                              out = "";
+                              len = str.length;
+                              for(i = 0; i < len; i++) {
+                                 c = str.charCodeAt(i);
+                                 if ((c >= 0x0001) && (c <= 0x007F)) {
+                                    out += str.charAt(i);
+                                 } else if (c > 0x07FF) {
+                                    out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                                    out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+                                    out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+                                 } else {
+                                    out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+                                    out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+                                 }
+                              }
+                              return out;
+                           }
+                          var codeconfig={
+                             render: "table", //table方式
+                             width: 140, //宽度
+                             height:140, //高度
+                             text: toUtf8("www.helloweba.com") //任意内容
+                          }
+                          $("#weixin_qrcode").qrcode(codeconfig);
+                          $("#weixin_qrcode").css("width",codeconfig.width+"px");
+                          $("#weixin_qrcode").css("height",codeconfig.height+"px");
+                       </script>
+
+                    </div>
+                </div>
+                <div class="one-half column-last">
+                    <div class="widget contact-info">
+                        <h3>联系我们</h3>
+                        <div>
+                            <p class="address"><strong>地址:</strong> 北京市朝阳区工人体育馆北路21号永利国际中心2单元307</p>
+                            <p class="phone"><strong>电话:</strong> 010-84425704</p>
+                            <p class="email"><strong>咨询:</strong> <a href="mailto:kerui.tao@wowfantasy.cn">kerui.tao@wowfantasy.cn</a></p>
+                            <p class="email"><strong>商务合作:</strong> <a href="mailto:kerui.tao@wowfantasy.cn">kerui.tao@wowfantasy.cn</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end footer top -->
+
+        <!-- begin footer bottom -->
+        <div id="footer-bottom">
+        	<div class="container clearfix">
+                <div class="one-half">
+                    <p>Copyright &copy; 泛泰思科技（北京）有限公司</p>
+                </div>
+        
+                <div class="one-half column-last">
+                    <div class="foot_links">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end footer bottom -->
+	</footer>
+	<!-- end footer -->  
+</div>
+<!-- end container -->
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="关闭 (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="分享"></button>
+                <button class="pswp__button pswp__button--fs" title="全屏切换"></button>
+                <button class="pswp__button pswp__button--zoom" title="缩放"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

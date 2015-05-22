@@ -1,0 +1,61 @@
+{% extends "Base.html" %}
+{% block title %}创新前沿{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>硬件有料</h1>
+        </div>
+</section>
+
+<section class="container clearfix" id="content" style="">
+    <!-- begin main content -->
+    <section class="blog-entry-list" id="main">
+        {%for one in news%}
+        <article class="entry clearfix">
+            <div class="entry-image">
+            <img alt="" src="{{one.image ~ "?imageView/1/w/940/h/400"}}">
+            </div>
+
+            <div class="entry-date" time="{{one.time}}">
+                <div class="entry-day"></div>
+                <div class="entry-month"></div>
+            </div>
+            <div class="entry-body">
+                <h2 class="entry-title"><a href="/NewsContent?id={{one.id}}">{{ one.title }}</a></h2>
+                <div class="entry-meta">
+                    <span class="author"><a href="#">{{one.author}}</a></span>
+                    <!--span class="category"><a href="#">Photography</a>, <a href="#">Web Design</a></span-->
+                    <!--span class="comments"><a href="#">4 Comments</a></span-->
+                </div>
+                <div class="entry-content">
+                    <p>{{one.summary}}</p>
+                </div>
+            </div>
+        </article>
+        {%endfor%}
+        <hr>
+
+        <!-- begin pagination -->
+        <!--nav class="page-nav">
+            <span>Page 7 of 15</span>
+            <ul>
+                <li><a href="#">« First</a></li>
+                <li><a href="#">‹ Previous</a></li>
+                <li><a href="#">6</a></li>
+                <li class="current">7</li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li><a href="#">10</a></li>
+                <li><a href="#">Next ›</a></li>
+                <li><a href="#">Last »</a></li>
+            </ul>
+        </nav-->
+        <!-- end pagination -->
+    </section>
+    <!-- end main content -->
+
+    <!-- begin sidebar -->
+
+    <!-- end sidebar -->
+</section>
+{% endblock %}

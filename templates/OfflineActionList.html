@@ -1,0 +1,42 @@
+{% extends "Base.html" %}
+{% block title %}
+线下活动
+{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>线下活动</h1>
+        </div>
+</section>
+<section class="container clearfix" id="content" style="min-height: 80px;">
+        <ul class="portfolio-grid project-list clearfix" id="gallery">
+            {%for one in parties%}
+            <li class="entry one-fourth">
+                <a href="/OfflineAction?id={{one.id}}"><img alt="" src="{{one.image.split(',')[0] ~ "?imageView/1/w/220/h/140"}}"></a>
+                <a href="/OfflineAction?id={{one.id}}" class="entry-meta">
+                    <h3 class="entry-title">{{one.title}}</h3>
+                    <div class="entry-content">
+                        <p>{{one.place}}</p>
+                    </div>
+                </a>
+            </li>
+            {%endfor%}
+        </ul>
+        <!-- end gallery -->
+    <hr>
+    <!--nav class="page-nav">
+                <span>Page 7 of 15</span>
+                <ul>
+                    <li><a href="#">« First</a></li>
+                    <li><a href="#">‹ Previous</a></li>
+                    <li><a href="#">6</a></li>
+                    <li class="current">7</li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                    <li><a href="#">10</a></li>
+                    <li><a href="#">Next ›</a></li>
+                    <li><a href="#">Last »</a></li>
+                </ul>
+            </nav-->
+    </section>
+{% endblock %}

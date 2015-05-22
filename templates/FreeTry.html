@@ -1,0 +1,133 @@
+{% extends "Base.html" %}
+{% block title %}免费尝鲜{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>免费尝鲜</h1>
+        </div>
+</section>
+<section id="content" class="container clearfix">
+        <section id="slider-home">
+        <div id="flexslider-home" class="flex-container container">
+            <div class="flexslider">
+                <ul class="slides">
+                    {%for pic in one.image.split(",")%}
+                    <li>
+                        <img src="{{pic ~ "?imageView/1/w/940/h/400"}}" alt="Modern Skyscraper">
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+        <!-- begin main -->
+        <section id="main" class="three-fourths">
+        <!-- begin contact form -->
+        <h2>{{one.title}}</h2>
+        <p>{{one.content}}</p>
+        <div id="contact-notification-box-success" class="notification-box notification-box-success" style="display: none;">
+            <p>你已经成功报名，我们会尽快和你联系.</p>
+            <a href="#" class="notification-close notification-close-success">x</a>
+        </div>
+
+        <div id="contact-notification-box-error" class="notification-box notification-box-error " style="display: none;">
+            <p>无法连接服务器，报名失败，请重试.</p>
+            <a href="#" class="notification-close notification-close-error">x</a>
+        </div>
+        <form id="contact-form" class="content-form" method="post" action="#">
+            <p>
+                <label for="name">姓名:<span class="note">*</span></label>
+                <input id="name" type="text" name="name" class="required">
+            </p>
+            <p>
+                <label for="email">Email:<span class="note">*</span></label>
+                <input id="email" type="email" name="email" class="required">
+            </p>
+            <p>
+                <label for="phone">电话:<span class="note">*</span></label>
+                <input id="phone" type="text" name="phone" class="required">
+            </p>
+            <p>
+                <label for="message">你为什么要尝试?<span class="note">*</span></label>
+                <textarea id="message" cols="68" rows="8" name="message" class="required"></textarea>
+            </p>
+            <p>
+                <input id="submit" class="button" type="submit"  value="报名">
+            </p>
+        </form>
+        <p><span class="note">*</span> 必须字段</p>
+        <!-- end contact form -->
+        </section>
+        <!-- end main -->
+
+        <!-- begin sidebar -->
+        <aside id="sidebar" class="one-fourth column-last">
+            <div class="widget contact-info">
+                <h3>联系方式</h3>
+                <p>您可以在这找到我们:</p>
+                <div>
+                    <p class="address"><strong>地址:</strong> 北京市朝阳区工人体育馆北路21号永利国际中心2单元307</p>
+                    <p class="phone"><strong>电话:</strong> 010-84425704</p>
+                    <p class="email"><strong>咨询:</strong> <a href="mailto:kerui.tao@wowfantasy.cn">kerui.tao@wowfantasy.cn</a></p>
+                    <p class="email"><strong>商务合作:</strong> <a href="mailto:kerui.tao@wowfantasy.cn">kerui.tao@wowfantasy.cn</a></p>
+                </div>
+            </div>
+        </aside>
+        <!-- end sidebar -->
+    </section>
+<script>
+    $("#contact-form").validate({
+        rules: {
+        phone: {
+          required: true,
+          phoneCN: true
+        }
+      },
+        submitHandler: function(form) {
+             $("#contact-notification-box-success").css('display', 'none');
+            $("#contact-notification-box-error").css('display', 'none');
+            $("#submit").attr('disabled',"true");
+            $.ajax({
+                    cache: true,
+                    type: "POST",
+                    url: '/FreeTryReg',//提交的URL
+                    data: $('#contact-form').serialize(),
+                    async: false,
+                    success: function (data) {
+                        $("#contact-notification-box-success").css('display', '');
+                            $("#submit").removeAttr('disabled', '');
+                            resetFormData('#contact-form');
+                    },
+                    error: function (request) {
+                        $("#contact-notification-box-error").css('display', '');
+                        $("#submit").removeAttr('disabled');
+                    }
+                });
+            return false;
+         }
+    });
+
+    function resetFormData(from) {
+        $(from).find(":input").each(function () {
+            var field = $(this);
+            var tagName = field.prop("nodeName").toLowerCase();
+            if (tagName == 'select') {
+                field.prop('selectedIndex', 0);
+            } else {
+                if (field.is(':checkbox')) {
+                    field.attr("checked", field.prop("defaultChecked"));
+                } else {
+                    var defaultValue = field.prop("defaultValue");
+                    if (defaultValue) {
+                        field.val(defaultValue);
+                    } else {
+                        field.val('');
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "Base.html" %}
+{% block title %}{{party.title}}{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>{{party.title}}</h1>
+        </div>
+</section>
+<section class="container clearfix" id="content" style="min-height: 80px;">
+    	<!-- begin main content -->
+    <section class="blog-entry-list three-fourths" id="main">
+
+        <article class="entry clearfix">
+            <a title="Post Title" href="{{party.image}}" class="entry-image lightbox">
+                <span class="overlay zoom"></span>
+                <img alt="" src="{{party.image ~ "?imageView/1/w/700/h/240"}}">
+            </a>
+            <div class="entry-date" time="{{party.time}}">
+                <div class="entry-day"></div>
+                <div class="entry-month"></div>
+            </div>
+            <div class="entry-body">
+                <h2 class="entry-title">{{party.title}}</h2>
+                <div class="entry-content">
+                    {{content}}
+                </div>
+            </div>
+        </article>
+    </section>
+    <div class="one-fourth column-last">
+        <h3>主办方</h3>
+        <p>{{party.sponsor}}</p>
+        <h3>地址</h3>
+        <p>{{party.place}}</p>
+        <h3>嘉宾</h3>
+        <ul class="check">
+            {%for one in guests%}
+            <li>{{one.name}}({{one.unit}})</li>
+            {%endfor%}
+        </ul>
+        <h3>开始时间</h3>
+        <p>{{party.startTime}}</p>
+        <h3>结束时间</h3>
+        <p>{{party.stopTime}}</p>
+        <div id="contact-notification-box-success" class="notification-box notification-box-success" style="display: none;">
+            <p>你已经成功报名，我们会尽快和你联系.</p>
+            <a href="#" class="notification-close notification-close-success">x</a>
+        </div>
+        <div id="contact-notification-box-error" class="notification-box notification-box-error " style="display: none;">
+            <p>无法连接服务器，报名失败，请重试.</p>
+            <a href="#" class="notification-close notification-close-error">x</a>
+        </div>
+        <form id="join-form" class="content-form" method="post" action="#">
+            <input type="hidden" name="partyid" value="{{party.id}}">
+            <p>
+                <label for="name">姓名:<span class="note">*</span></label>
+                <input id="name" type="text" name="name" class="required">
+            </p>
+            <p>
+                <label for="email">Email:<span class="note">*</span></label>
+                <input id="email" type="email" name="email" class="required">
+            </p>
+            <p>
+                <label for="phone">电话:<span class="note">*</span></label>
+                <input id="phone" type="text" name="phone" class="required">
+            </p>
+            <p>
+                <input id="submit" class="button" type="submit" name="submit" value="我要报名">
+            </p>
+            <p><span class="note">*</span> 必填字段</p>
+        </form>
+    </div>
+</section>
+<script>
+
+ $( "#join-form" ).validate({
+  rules: {
+    phone: {
+      required: true,
+      phoneCN: true
+    }
+  },
+     submitHandler: function(form) {
+             $("#contact-notification-box-success").css('display', 'none');
+            $("#contact-notification-box-error").css('display', 'none');
+            $("#submit").attr('disabled',"true");
+            $.ajax({
+                    cache: true,
+                    type: "POST",
+                    url: '/OfflineActionReg',//提交的URL
+                    data: $('#join-form').serialize(),
+                    async: false,
+                    success: function (data) {
+                        $("#contact-notification-box-success").css('display', '');
+                            $("#submit").removeAttr('disabled', '');
+                            resetFormData('#join-form');
+                    },
+                    error: function (request) {
+                        $("#contact-notification-box-error").css('display', '');
+                        $("#submit").removeAttr('disabled');
+                    }
+                });
+            return false;
+         }
+    });
+
+    function resetFormData(from) {
+        $(from).find(":input").each(function () {
+            var field = $(this);
+            var tagName = field.prop("nodeName").toLowerCase();
+            if (tagName == 'select') {
+                field.prop('selectedIndex', 0);
+            } else {
+                if (field.is(':checkbox')) {
+                    field.attr("checked", field.prop("defaultChecked"));
+                } else {
+                    var defaultValue = field.prop("defaultValue");
+                    if (defaultValue) {
+                        field.val(defaultValue);
+                    } else {
+                        field.val('');
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

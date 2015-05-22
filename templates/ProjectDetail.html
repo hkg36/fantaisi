@@ -1,0 +1,32 @@
+{% extends "Base.html" %}
+{% block title %}{{proj.title}}{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>{{proj.title}}</h1>
+        </div>
+</section>
+<section class="container clearfix" id="content" style="">
+    <!-- begin main content -->
+    <section class="blog-entry-list" id="main">
+
+        <article class="entry clearfix">
+            <div class="entry-body">
+                <div class="oneline">
+                    {%for pic in pics%}
+                    <div class="one-fourth">
+                        <a title="Image Title" href="{{pic}}" class="entry-image lightbox">
+                            <span class="overlay zoom"></span>
+                            <img alt="" src="{{pic ~ "?imageView/1/w/220/h/140"}}">
+                        </a>
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="entry-content">
+                   {{content}}
+                </div>
+            </div>
+        </article>
+    </section>
+</section>
+{% endblock %}

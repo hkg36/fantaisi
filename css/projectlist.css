@@ -1,0 +1,13 @@
+#mainlist{
+    width: 100%;
+}
+#mainlist .introduce{
+    width: auto;
+}
+#mainlist .morebutton{
+    display: block;
+    float: right;
+}
+#mainlist li{
+    overflow: auto;
+}

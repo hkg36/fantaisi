@@ -1,0 +1,121 @@
+{% extends "Base.html" %}
+{% block title %}fantasy{% endblock %}
+{% block content %}
+    <section id="slider-home">
+        <div id="flexslider-home" class="flex-container container">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <img src="images/action/sucai_15.jpg" alt="Modern Skyscraper">
+                           <!-- <div class="flex-caption">
+                        <h2>Web Design Solutions for Business</h2>-->
+                              <!-- <div>
+                             <a class="button" href="http://www.cssmoban.com/">Learn More</a>
+                                <p>Mauris fringilla nibh vitae turpis rhoncus ornare luctus nibh tincidunt. Duis ultricies imperdiet leo id dictum amet magna. </p>
+                            </div>
+                        </div>-->
+                    </li>
+                    <li>
+                        <img src="images/action/post1.jpg" alt="Business Woman">
+                       <!-- <div class="flex-caption">
+                              <h2>Make Your Business Stand Out Online</h2>-->
+                           <!-- <div>
+                                <a class="button" href="http://www.cssmoban.com/">Learn More</a>
+                                <p>Duis mattis odio non leo lacinia in vulputate lorem auctor. Praesent ac mauris tincidunt magna ultricies euismod.</p>
+                            </div>
+                        </div>-->
+                    </li>
+                   <!--  <li>
+                        <img src="images/slider/slides/940x400/computer-room-940x400.png" alt="Computer Room">
+                        <div class="flex-caption">
+                            <h2>Impress Website Visitors Instantly</h2>
+                            <div>
+                                <a class="button" href="http://www.cssmoban.com/">Learn More</a>
+                                <p>Etiam aliquam hendrerit ante, a ullamcorper ante vulputate vitae. Fusce ante eros, porta eget bibendum in imperdiet.</p>
+                            </div>
+                        </div>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="content" class="container clearfix">
+        <!-- begin about us -->
+        <section class="one-half">
+            <h3>项目展示</h3>
+            <div id="slider-about-us" class="about-us entry-slider">
+                <div id="flexslider-about-us" class="flex-container">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            {%for one in project.image.split(",") %}
+                            <li>
+                                <img src="{{one ~ "?imageView/1/w/512/h/343"}}" alt="Our Company" title="">
+                            </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p>{{project.summary}}</p>
+            <a class="button generic" href="/ProjectList">更多</a>
+        </section>
+        <!-- end about us -->
+
+        <!-- begin latest posts -->
+        <section class="one-half column-last">
+            <h3>新闻</h3>
+            <!-- begin post carousel -->
+            <ul class="post-carousel">
+                <!-- begin first column -->
+                <li>
+                     {%for one in news%}
+                    <div class="entry">
+                        <div class="entry-date" time="{{one.time}}">
+                            <div class="entry-day"></div>
+                            <div class="entry-month"></div>
+                        </div>
+                        <div class="entry-body">
+                            <h4 class="entry-title"><a href="/NewsContent?id={{one.id}}">{{one.title}}</a></h4>
+                            <div class="entry-content">
+                                <p>{{one.summary}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if not loop.last %}
+                    </li>
+                    <li>
+                    {%endif%}
+                    {%endfor%}
+                </li>
+            </ul>
+
+            <a href="/NewsList" class="button generic">更多</a>
+        </section>
+        <!-- end latest posts -->
+
+        <hr>
+
+        <!-- begin latest projects -->
+        <section>
+        	<h3>合作伙伴</h3>
+            <!-- begin project carousel -->
+            <ul class="project-carousel project-list">
+            	{%for one in partners%}
+                <li class="entry">
+                    <a class="entry-image lightbox" title="Project Title" href="{{one.image}}"><span class="overlay zoom"></span><img src="{{one.image ~ "?imageView/1/w/220/h/140"}}" alt=""></a>
+                    <a class="entry-meta" href="portfolio-item-image.html">
+                        <h4 class="entry-title">{{one.name}}</h4>
+                        <div class="entry-content">
+                            <p>{{one.introduction}}</p>
+                        </div>
+                    </a>
+                </li>
+                {%endfor%}
+            </ul>
+            <!-- end project carousel -->
+        </section>
+        <!-- end latest projects -->
+    </section>
+{% endblock %}

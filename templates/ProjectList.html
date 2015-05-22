@@ -1,0 +1,40 @@
+{% extends "Base.html" %}
+{% block morescript %}
+<link href="css/projectlist.css" type="text/css" rel="stylesheet" id="main-style">
+{% endblock %}
+{% block title %}项目展示{% endblock %}
+{% block content %}
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>项目展示</h1>
+        </div>
+</section>
+<section id="content" class="container clearfix">
+    <ul id="mainlist">
+        {%for one in projs%}
+        <li>
+            <div class="entry-image">
+                <img title="Image Title" alt="" src="{{one.image.split(',')[0] ~ "?imageView/1/w/940/h/400"}}">
+            </div>
+            <h3>{{one.title}}</h3>
+            <div class="introduce">{{one.summary}}
+            </div>
+            <a href="/ProjectDetail?id={{one.id}}" class="button yellow morebutton">详情</a>
+            <hr>
+        </li>
+        {%endfor%}
+        <!--li>
+            <div class="entry-image float-left">
+                <img title="Image Title" alt="" src="images/entries/220x140/business-woman-220x140.png">
+            </div>
+            <div class="introduce">Vestibulum quis diam purus. Nulla id enim vel quam lacinia elementum. Phasellus a hendrerit enim. Suspendisse lacinia
+                nulla lacinia tellus convallis non luctus tortor iaculis. Nam cursus augue sed lectus consequat non laoreet nulla sodales. Nunc sagittis sapien at
+                urna mollis in porta sem mattis. Duis venenatis odio erat. Nullam nec commodo risus.
+                Integer arcu eros, luctus in suscipit at, blandit in lectus. Quisque justo lorem, vulputate quis fermentum ac, cursus non leo.
+            </div>
+            <a href="#" class="button yellow morebutton">详情</a>
+            <hr>
+        </li-->
+    </ul>
+</section>
+{% endblock %}
