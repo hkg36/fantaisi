@@ -13,3 +13,16 @@ class VideoList(WebSiteBasePage.AutoPage):
             videos=session.query(Video).all()
             tpl=WebSiteBasePage.jinja2_env.get_template('VideoList.html')
             return tpl.render(videos=videos)
+
+youku_id='7ef06e647b67fa1b'
+playlist_id=21581216
+class VideoList2(WebSiteBasePage.AutoPage):
+    def GET(self):
+        tpl=WebSiteBasePage.jinja2_env.get_template('VideoList2.html')
+        return tpl.render(youku_id=youku_id,playlist_id=playlist_id)
+
+class VideoDetail(WebSiteBasePage.AutoPage):
+    def GET(self):
+        user_data = web.input()
+        tpl=WebSiteBasePage.jinja2_env.get_template('VideoDetail.html')
+        return tpl.render(youku_id=youku_id,video_id=user_data.video_id)

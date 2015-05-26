@@ -6,63 +6,79 @@
 {% block content %}
 <section id="page-title">
     	<div class="container clearfix">
-            <h1>视频公园</h1>
+            <h1 id="title"></h1>
         </div>
 </section>
 <section id="content" class="container clearfix">
     <section class="blog-entry-list" id="main">
         <article class="entry clearfix">
             <div class="entry-video">
-                <div class="fluid-width-video-wrapper" style="padding-top: 56.2857%;"><iframe height=498 width=510 src="http://player.youku.com/embed/XOTQ0MTcxOTcy" frameborder=0 allowfullscreen></iframe></div>
+                <div class="fluid-width-video-wrapper" style="padding-top: 56.2857%;">
+                    <iframe height=498 width=510 src="" frameborder=0 allowfullscreen id="videoplayer"></iframe>
+                </div>
             </div>
             <div class="entry-date">
-                <div class="entry-day">15</div>
-                <div class="entry-month">Jan</div>
+                <div class="entry-day"></div>
+                <div class="entry-month"></div>
             </div>
             <div class="entry-body">
-                <h2 class="entry-title">肯德基和麦当劳的优惠券意义在哪里？为何不直接降价？</h2>
+                <h2 class="entry-title"></h2>
                 <div class="entry-meta">
-                    <span class="author"><a href="#">admin</a></span>
-                    <span class="category"><a href="#">Photography</a>, <a href="#">Web Design</a></span>
+                    <span class="author"></span>
+                    <span class="category"></span>
                     <span class="comments"><a href="#">4 Comments</a></span>
                 </div>
                 <div class="entry-content">
-                   <blockquote class="simple">
-                        <div class="quote-content">
-                            <p>优惠券的第一个好处，在于让那些没有优惠券就不打算消费的人掏钱，但又不影响从那些有没有优惠券都会消费的人那里赚钱。</p>
-                        </div>
-                        <div class="quote-meta">&mdash; Justin Lee</div>
-                    </blockquote>
-                    <p>比如一对鸡翅卖9块钱，很多对价格不敏感的顾客，直接掏钱就买了，这些人不是优惠券的目标人群，要是你把鸡翅统一降价到7块，从他们身上就少赚了2块钱。
 
-但你发行“持券买鸡翅减2元”的优惠券，有的顾客本来不打算来店里消费，你根本赚不到他的钱，但因为他有了鸡翅优惠券，出于贪便宜的心理，他就来买鸡翅，于是你赚到了他的钱，尽管少赚了2元，但总比赚不到好啊。
-
-从这一点说，优惠券就比降价高明了。优惠券相比降价还有另外一个好处——为通货膨胀提供缓冲期。
-
-假设2011年时一对鸡翅的各种成本只需要5元，那时你售价9元，能赚4元；到2015年成本已经升到7元了，你保持9元售价不变，虽然赚得少了，但还是能赚。但如果你2011年做了一个降价的决定，把鸡翅从9元降为7元，2015年你咋整？继续卖7元赚不到钱，但一涨价必然会损失一批消费者。
-
-但如果你只是通过优惠券给部分人优惠，就避免了这个问题。</p>
-                    <ol class="decimal indent">
-                        <li>降价促销没法反复用，但优惠券可以无限次循环。</li>
-                        <li>为通货膨胀提供缓冲期。</li>
-                        <li>在于让那些没有优惠券就不打算消费的人掏钱，但又不影响从那些有没有优惠券都会消费的人那里赚钱。</li>
-                    </ol>
-                    <p>
-如果你把鸡翅从9元降到7元，短时间内固然也能吸引对价格敏感的顾客来消费，但时间长了，当顾客已经忘记原先的9元期觉得7元才是正道，降价对销量的带动效果就变成零了。虽然你可以再次降价，但总不能降得亏本。
-
-但优惠券不一样，这波优惠刺激不到消费者了，就换种优惠方式，每次都能吸引新的人群，只要店不倒闭，你一年四季可以天天搞。 </p>
                 </div>
             </div>
         </article>
-        <hr>
-        <section>
-            <h3>Related Posts</h3>
-            <ul class="square indent">
-                <li><a href="blog-post-slider.html">Designing For Device Orientation: From Portrait To Landscape</a></li>
-                <li><a href="blog-post-video.html">Useful Talks and Videos from Web Design Conferences</a></li>
-                <li><a href="blog-post-no-media.html">The Creative Way to Maximize Design Ideas with Type</a></li>
-            </ul>
-        </section>
+        <script>
+            $(document).ready(function(){
+                $.getJSON("https://openapi.youku.com/v2/videos/show_basic.json?client_id={{youku_id}}&video_id={{video_id}}",function(data){
+                    $("#videoplayer").attr("src",data.player)
+                    $(".entry-date").attr('time',data.published)
+                    $(".entry-title").text(data.title)
+                    $(".entry-content").text(data.description)
+                    $(".author").html('<a href="{1}">{0}</a>'.format(data.user.name,data.user.link))
+                    $(".category").html('<a href="#">{0}</a>'.format(data.category))
+                    $("#title").text(data.title)
+                    UpdateDateString();
+                })
+            })
+        </script>
+
+    </section>
+    <section id="comments">
+        <h3>4 Comments</h3>
+        <!-- begin comment list -->
+        <ol class="comment-list">
+            <!-- begin comment -->
+            <li class="comment">
+                <!-- begin comment 4 -->
+                <div class="comment-wrap" id="comment-4">
+                    <div class="avatar-wrap">
+                        <div class="avatar">
+                            <img alt="" src="images/demo/avatar-50x50.png">
+                        </div>
+                        <a style="display: none;" class="comment-edit-link" href="#" title="Edit comment">Edit</a>
+                    </div>
+                    <div class="comment-details">
+                        <div class="comment-author"><a href="#">Cathy</a></div>
+                        <div class="comment-meta">February 18, 2012 at 11:08 am</div>
+                        <div class="comment-content">
+                            <p>Morbi vel quam ligula. Donec nunc augue, scelerisque vitae pretium a, dapibus vitae nisi. Vivamus et tortor non ante bibendum ornare vitae ut orci. Mauris elementum sodales fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur vel sapien sit amet orci rhoncus accumsan. Ut lorem leo, pharetra in dignissim non, auctor nec arcu. Nulla facilisi. Curabitur tempus placerat volutpat. Morbi quis commodo purus.</p>
+                            <a class="comment-reply-link" href="#" onclick="">Reply</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end comment 4 -->
+            </li>
+            <!-- end comment -->
+        </ol>
+        <!-- end comment list -->
     </section>
 </section>
+<hr>
+
 {% endblock %}

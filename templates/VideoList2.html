@@ -1,0 +1,56 @@
+{% extends "Base.html" %}
+{% block title %}
+fantasy
+{% endblock %}
+{% block content %}
+<style>
+    .videopre{
+        width: 100%;
+    }
+</style>
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>项目展示</h1>
+        </div>
+</section>
+<section class="container clearfix" id="content" style="min-height: 80px;">
+        <ul class="portfolio-grid project-list clearfix" id="gallery">
+
+        </ul>
+        <!-- end gallery -->
+    <hr>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("https://openapi.youku.com/v2/playlists/videos.json?client_id={{youku_id}}&playlist_id={{playlist_id}}",function(data){
+                var html_text=""
+                $.each(data.videos,function(i,v){
+                    html_text+=('<li class="entry one-third">'+
+                        '<a href="/VideoDetail?video_id={3}" target="_blank"><img class="videopre" alt="" src="{0}"></a>'+
+                        '<a href="/VideoDetail?video_id={3}" target="_blank" class="entry-meta">'+
+                            '<h3 class="entry-title">{1}</h3>'+
+                            '<div class="entry-content">'+
+                                '<p>{2}</p>'+
+                            '</div>'+
+                        '</a>'+
+                    '</li>').format(v.thumbnail,v.title, v.category, v.id)
+                })
+                $("#gallery").html(html_text)
+            })
+        })
+    </script>
+    <!--nav class="page-nav">
+                <span>Page 7 of 15</span>
+                <ul>
+                    <li><a href="#">« First</a></li>
+                    <li><a href="#">‹ Previous</a></li>
+                    <li><a href="#">6</a></li>
+                    <li class="current">7</li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                    <li><a href="#">10</a></li>
+                    <li><a href="#">Next ›</a></li>
+                    <li><a href="#">Last »</a></li>
+                </ul>
+            </nav-->
+    </section>
+{% endblock %}

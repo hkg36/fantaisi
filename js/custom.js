@@ -944,7 +944,11 @@ $.validator.addMethod("phoneCN", function(phone_number, element) {
 
 function UpdateDateString(){
     $(".entry-date").each(function(){
-        var t=moment($(this).attr("time"))
+        var tstr=$(this).attr("time")
+        if(typeof tstr == typeof undefined || tstr == false){
+             return
+        }
+        var t=moment(tstr)
         if(t.isValid()){
             $(this).find('.entry-day').text(t.format("MMM DD"))
             $(this).find(".entry-month").text(t.format("YYYY"))
@@ -986,4 +990,17 @@ function CheckWeiboStatus(islogin)
         $("#loginbn_plane").show()
         $("#logininfo_plane").hide()
     }
+}
+
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+            var type=typeof args[number];
+            if(type!='undefined')
+                return args[number]
+            else
+                return ""
+        });
+    };
 }
