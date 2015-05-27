@@ -9,7 +9,7 @@ from tools.data import AutoClose
 from sqlalchemy.orm import defer
 from sqlalchemy import func
 
-class MainPage(WebSiteBasePage.AutoPage,WebSiteBasePage.DefaultPage):
+class MainPage(WebSiteBasePage.AutoPage):
     def GET(self):
         session=database.Session()
         with AutoClose(session) as ac:

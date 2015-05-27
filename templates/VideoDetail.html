@@ -13,8 +13,8 @@
     <section class="blog-entry-list" id="main">
         <article class="entry clearfix">
             <div class="entry-video">
-                <div class="fluid-width-video-wrapper" style="padding-top: 56.2857%;">
-                    <iframe height=498 width=510 src="" frameborder=0 allowfullscreen id="videoplayer"></iframe>
+                <div class="fluid-width-video-wrapper" style="padding-top: 56.2857%;" id="youkuplayer">
+                    <!--iframe height=498 width=510 src="" frameborder=0 allowfullscreen id="videoplayer"></iframe-->
                 </div>
             </div>
             <div class="entry-date">
@@ -26,17 +26,23 @@
                 <div class="entry-meta">
                     <span class="author"></span>
                     <span class="category"></span>
-                    <span class="comments"><a href="#">4 Comments</a></span>
+                    <span class="comments"><a href="#comments"><span name="comment-count"></span> 评论</a></span>
                 </div>
                 <div class="entry-content">
 
                 </div>
             </div>
         </article>
+        <script type="text/javascript" src="http://player.youku.com/jsapi"></script>
         <script>
             $(document).ready(function(){
+                player = new YKU.Player('youkuplayer',{
+                styleid: '0',
+                client_id: '{{youku_id}}',
+                vid: '{{video_id}}'
+                });
                 $.getJSON("https://openapi.youku.com/v2/videos/show_basic.json?client_id={{youku_id}}&video_id={{video_id}}",function(data){
-                    $("#videoplayer").attr("src",data.player)
+                    //$("#videoplayer").attr("src",data.player)
                     $(".entry-date").attr('time',data.published)
                     $(".entry-title").text(data.title)
                     $(".entry-content").text(data.description)
@@ -50,33 +56,85 @@
 
     </section>
     <section id="comments">
-        <h3>4 Comments</h3>
+        <h3><span name="comment-count"></span> 评论</h3>
+        <section id="respond">
+            <h3 id="reply-title">评论</h3>
+            <form action="#" method="post" id="comment-form" novalidate="novalidate">
+                <p>
+                    <textarea id="comment" cols="45" rows="3" name="comment" required></textarea>
+                </p>
+                <p class="form-submit">
+                    <input type="submit" name="submit" id="submit" value="发表评论">
+                </p>
+            </form>
+        </section>
         <!-- begin comment list -->
         <ol class="comment-list">
-            <!-- begin comment -->
-            <li class="comment">
-                <!-- begin comment 4 -->
-                <div class="comment-wrap" id="comment-4">
-                    <div class="avatar-wrap">
-                        <div class="avatar">
-                            <img alt="" src="images/demo/avatar-50x50.png">
-                        </div>
-                        <a style="display: none;" class="comment-edit-link" href="#" title="Edit comment">Edit</a>
-                    </div>
-                    <div class="comment-details">
-                        <div class="comment-author"><a href="#">Cathy</a></div>
-                        <div class="comment-meta">February 18, 2012 at 11:08 am</div>
-                        <div class="comment-content">
-                            <p>Morbi vel quam ligula. Donec nunc augue, scelerisque vitae pretium a, dapibus vitae nisi. Vivamus et tortor non ante bibendum ornare vitae ut orci. Mauris elementum sodales fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur vel sapien sit amet orci rhoncus accumsan. Ut lorem leo, pharetra in dignissim non, auctor nec arcu. Nulla facilisi. Curabitur tempus placerat volutpat. Morbi quis commodo purus.</p>
-                            <a class="comment-reply-link" href="#" onclick="">Reply</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- end comment 4 -->
-            </li>
-            <!-- end comment -->
+
         </ol>
         <!-- end comment list -->
+        <script>
+            function BuildComment(one){
+                var time=moment.unix(one.time).locale("zh-cn")
+                var htmlstr=('<li class="comment">'+
+                '<div class="comment-wrap" id="comment-4">'+
+                    '<div class="avatar-wrap">'+
+                       '<div class="avatar">'+
+                            '<img alt="" src="{0}">'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="comment-details">'+
+                        '<div class="comment-author"><a href="#">{1}</a></div>'+
+                        '<div class="comment-meta">{2}</div>'+
+                        '<div class="comment-content">'+
+                            '<p>{3}</p>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '</li>').format(one.user.image,one.user.nickname,time.format("dddd, MMMM Do YYYY,a h:mm"),one.text)
+                return htmlstr
+            }
+            $(document).ready(function(){
+                 $( "#comment-form" ).validate({
+                     submitHandler: function(form) {
+                         if(!($.cookie("uid")>0)){
+                             swal("请先登录","登录后可发贴","error")
+                             return
+                         }
+                            $.ajax({
+                                    type: "POST",
+                                    url: '/comment/AddVideoComment',//提交的URL
+                                    data: {text:$("#comment").val(),
+                                    video_id:'{{video_id}}'},
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        var html_str=BuildComment(data)
+                                        $(html_str).hide().prependTo(".comment-list").slideDown("slow");
+                                        $("span[name=comment-count]").text(parseInt($($("span[name=comment-count]")[0]).text())+1)
+                                    },
+                                    error: function (request) {
+                                        swal("错误", "网络错误请重试", "error");
+                                    }
+                                });
+                            return false;
+                         }
+                    });
+
+                $.ajax({
+                    type: "GET",
+                    url: '/comment/VideoCommentList?video_id={{video_id}}',
+                    dataType: 'json',
+                    success: function (data){
+                        var html_str=""
+                        $.each(data.comments,function(k,v){
+                            html_str+=BuildComment(v)
+                        })
+                        $(".comment-list").html(html_str)
+                        $("span[name=comment-count]").text(data.comments.length)
+                    }
+                })
+            })
+        </script>
     </section>
 </section>
 <hr>

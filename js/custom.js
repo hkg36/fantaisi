@@ -914,7 +914,6 @@ jQuery(document).ready(function ($) {
     })
     CheckWeiboStatus(false)
 
-    moment.locale('en',{})
     UpdateDateString();
 });
 var QQUser={}
@@ -937,6 +936,7 @@ function QQLogoutFun(){
     QQUser={}
     $("#loginbn_plane").show()
     $("#logininfo_plane").hide()
+    $.get("/login/Logout")
 }
 $.validator.addMethod("phoneCN", function(phone_number, element) {
     return this.optional(element) || phone_number.match(/^[0-9\-\(\)\s]+$/);
@@ -948,7 +948,7 @@ function UpdateDateString(){
         if(typeof tstr == typeof undefined || tstr == false){
              return
         }
-        var t=moment(tstr)
+        var t=moment(tstr).locale('en')
         if(t.isValid()){
             $(this).find('.entry-day').text(t.format("MMM DD"))
             $(this).find(".entry-month").text(t.format("YYYY"))
@@ -989,6 +989,7 @@ function CheckWeiboStatus(islogin)
         WBUser={}
         $("#loginbn_plane").show()
         $("#logininfo_plane").hide()
+        $.get("/login/Logout")
     }
 }
 

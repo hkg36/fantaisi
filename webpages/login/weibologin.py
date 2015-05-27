@@ -37,6 +37,7 @@ class WBUserInfo(WebSiteBasePage.AutoPage):
             usr=session.merge(usr)
             session.commit()
 
+            tools.data.session.uid=usr.id
             web.setcookie("uid",usr.id)
             web.setcookie("qqopenid","")
             web.setcookie("wbuid",usr.weibo_id)

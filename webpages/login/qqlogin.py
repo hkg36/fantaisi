@@ -13,6 +13,7 @@ class QQLogin(WebSiteBasePage.AutoPage):
         web.setcookie("qqopenid","")
         web.setcookie("wbuid","")
         tpl=WebSiteBasePage.jinja2_env.get_template('login/QQLogin.html')
+        tools.data.session.uid=0
         return tpl.render()
 
 class QQUserInfo(WebSiteBasePage.AutoPage):
@@ -43,3 +44,10 @@ class QQUserInfo(WebSiteBasePage.AutoPage):
             web.setcookie("uid",usr.id)
             web.setcookie("qqopenid",usr.qq_openid)
         return ""
+
+class Logout(WebSiteBasePage.AutoPage):
+    def GET(self):
+        web.setcookie("uid",0)
+        web.setcookie("qqopenid","")
+        web.setcookie("wbuid","")
+        tools.data.session.uid=0
